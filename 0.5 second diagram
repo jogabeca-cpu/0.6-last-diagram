@@ -1,0 +1,24 @@
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Usuario
+    participant Navegador as Navegador (Chrome)
+    participant Servidor as Servidor (Helsinki API)
+
+    Note over Usuario,Navegador: Paso 1: Carga Inicial de la Estructura SPA
+    Usuario->>Navegador: Ingresa a studies.cs.helsinki.fi/exampleapp/spa
+    Navegador->>Servidor: HTTP GET /exampleapp/spa
+    Servidor-->>Navegador: Retorna el código HTML básico (contenedor vacío)
+    
+    Note over Navegador,Servidor: Paso 2: Carga de Estilos y la Lógica SPA
+    Navegador->>Servidor: HTTP GET /exampleapp/main.css
+    Servidor-->>Navegador: Retorna las reglas de estilos CSS
+    Navegador->>Servidor: HTTP GET /exampleapp/spa.js
+    Servidor-->>Navegador: Retorna el archivo JavaScript de la SPA
+
+    Note over Navegador,Servidor: Paso 3: Consumo de Datos de manera Asíncrona
+    Note over Navegador: El archivo 'spa.js' se ejecuta y solicita los datos crudos
+    Navegador->>Servidor: HTTP GET /exampleapp/data.json
+    Servidor-->>Navegador: Retorna un arreglo JSON con el contenido de las notas
+    Note over Navegador: El JavaScript procesa el JSON y dibuja las notas en pantalla
+```
